@@ -93,6 +93,25 @@ function processPayment(simplifyToken) {
             alert("Thank you for your donation!");
             $('#paymentModal').modal('hide');
             getHourRate();
+
+            setTimeout(function(){
+                $('#tippyNinjaHourRate').animate({
+                        backgroundColor:'rgba(0, 150, 0, 0.3)'},
+                    function(){$('#tippyNinjaHourRate').css({
+                        '-webkit-box-shadow': '0px 0px 5px 5px rgba(0, 150, 0, 0.3)',
+                        'box-shadow': '0px 0px 5px 5px rgba(0, 150, 0, 0.3)'
+                    });
+                    });
+            },500);
+            setTimeout(function(){
+                $('#tippyNinjaHourRate').animate({
+                        backgroundColor:'rgba(0, 150, 0, 0.0)'},
+                    function(){$('#tippyNinjaHourRate').css({
+                        '-webkit-box-shadow': '0px 0px 5px 5px rgba(0, 150, 0, 0.0)',
+                        'box-shadow': '0px 0px 5px 5px rgba(0, 150, 0, 0.0)'
+                    });
+                    });
+            },1200);
         },
         error: function(error) {
             console.log("processPayment error");
