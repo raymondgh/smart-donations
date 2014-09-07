@@ -87,10 +87,30 @@ header {
     border-top-left-radius: 6px;
 }
 
-.form-group>label{
+.form-group>label, .modal-header>h4{
     color:black;
+    float: left;
 }
 
+.modal-body {
+    padding: 15px 150px;
+    text-align: center;
+}
+
+.modal-body-left {
+    float: left;
+}
+
+.modal-body>img {
+    text-align: center;
+}
+.modal-header {
+    height: 50px;
+}
+.modal-footer {
+    padding: 330px 238px 20px 0;
+    text-align: right;
+}
 .signin-left>input {
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px;
