@@ -4,19 +4,24 @@ var Datastore = require('nedb')
     , db = new Datastore({ filename: 'database.json', autoload: true });
 var fs = require('fs');
 var Simplify = require('simplify-commerce');
+var azure = require('azure-storage');
+
 var SimplifyClient;
-fs.exists('../keys/keys.js', function(exists) {
+var azureTableSvc;
+fs.exists('keys/keys.js', function(exists) {
     if (exists) {
         var Keys = require('../keys/keys.js');
         SimplifyClient = Simplify.getClient({
             publicKey: Keys.simplifyKeys.publicKey,
             privateKey: Keys.simplifyKeys.privateKey
         });
+        azureTableSvc = azure.createTableService(Keys.azureStorageKeys.accountName,Keys.azureStorageKeys.privateKey);
     } else {
         SimplifyClient = Simplify.getClient({
             publicKey: process.env.simplifyPublicKey,
             privateKey: process.env.simplifyPrivateKey
         });
+        azureTableSvc = azure.createTableService(process.env.azureStorageAccountName,process.env.azureStoragePrivateKey);
     }
 });
 
@@ -27,7 +32,7 @@ fs.exists('../keys/keys.js', function(exists) {
 //    privateKey: Keys.simplifyKeys.privateKey
 //});
 
-var azure = require('azure-storage');
+
 //var tableSvc = azure.createTableService();
 
 
@@ -110,11 +115,12 @@ router.get('/testDb', function(req, res) {
         amountEarned: '10000' //in cents
     };
 
-    db.insert(doc, function (err, newDoc) {   // Callback is optional
-        // newDoc is the newly inserted document, including its _id
-        // newDoc has no key called notToBeSaved since its value was undefined
-        res.end(JSON.stringify(newDoc));
-    });
+//    db.insert(doc, function (err, newDoc) {   // Callback is optional
+//        // newDoc is the newly inserted document, including its _id
+//        // newDoc has no key called notToBeSaved since its value was undefined
+//        res.end(JSON.stringify(newDoc));
+//    });
+    
 });
 
 router.get('/processPayment', function(req, res) {
