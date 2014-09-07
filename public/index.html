@@ -50,47 +50,11 @@
     </button>
     <button
             id="tippyNinjaDonate"
+            twitter-id=""
             class="btn btn-primary btn"
             data-toggle="modal" data-target="#myModal">
         DONATE
     </button>
-</header>
-
-
-
-
-<!-- PAGE CONTENT WRAPPER
-============================================= -->
-<div id="content-wrapper" class="container">
-    <div id="container-left" class=" col-lg-6">
-        <div class="instruction">
-            1. Count your project's work-hours<br/>
-            2. Authenticate with Twitter<br/>
-            3. Paste the code snippet in your site<br/>
-        </div>
-
-    </div>
-    <div id="container-right" class=" col-lg-6">
-        <div>
-            <img
-                    onclick="signIn()"
-                    class="signin"
-                    src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
-                    alt="Sign in with Twitter"
-                    title="Sign in with Twitter"/>
-        </div>
-        <div class="code">
-
-        </div>
-    </div>
-
-
-
-
-
-    <!-- Button trigger modal -->
-
-
     <!-- Modal -->
     <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -100,7 +64,7 @@
                     <h4 class="modal-title" id="myModalLabel">Make donation</h4>
                 </div>
                 <form id="simplify-payment-form" action="/processPayment" method="POST">
-                <div class="modal-body">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label>Donation Amount: </label>
                             <input id="donationAmount" type="text"
@@ -149,26 +113,49 @@
                                 <option value="22">2022</option>
                             </select>
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button
-                            type="button"
-                            class="btn btn-default"
-                            data-dismiss="modal">Close</button>
-                    <button
-                            id="process-payment-btn"
-                            type="submit"
-                            class="btn btn-primary">Donate</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button
+                                type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal">Close</button>
+                        <button
+                                id="process-payment-btn"
+                                type="submit"
+                                class="btn btn-primary">Donate</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
+</header>
 
 
 
 
+<!-- PAGE CONTENT WRAPPER
+============================================= -->
+<div id="content-wrapper" class="container">
+    <div id="container-left" class=" col-lg-6">
+        <div class="instruction">
+            1. Count your project's work-hours<br/>
+            2. Authenticate with Twitter<br/>
+            3. Paste the code snippet in your site<br/>
+        </div>
 
+    </div>
+    <div id="container-right" class=" col-lg-6">
+        <div>
+            <img
+                    onclick="signIn()"
+                    class="signin"
+                    src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
+                    alt="Sign in with Twitter"
+                    title="Sign in with Twitter"/>
+        </div>
+        <div id="code">
+        </div>
+    </div>
 </div>	 <!-- END PAGE CONTENT WRAPPER	-->
 
 
