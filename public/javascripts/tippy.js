@@ -46,8 +46,13 @@ function simplifyResponseHandler(data) {
         $paymentForm.append("<input type='hidden' name='simplifyToken' value='" + token + "' />");
         $paymentForm.append("<input type='hidden' name='twitterId' value='" + twitterId + "' />");
         $paymentForm.append("<input type='hidden' name='amount' value='" + donationAmount + "' />");
+        console.log("twitterId: " + twitterId);
+        console.log("simplifyToken: " + token);
+        console.log("amount: " + donationAmount);
+        console.log("Submitting form to our server" );
+
         // Submit the form to the server
-        $paymentForm.get(0).submit();
+//        $paymentForm.get(0).submit();
     }
 }
 
@@ -58,7 +63,8 @@ function signIn() {
         console.log(result);
         result.me().done(function(data) {
             console.log("ME " + JSON.stringify(data));
-            twitterId = data.id;
+            twitterId = data["raw"]["id"];
+            console.log("twitterId = " + twitterId);
             // twitterId = id_str
             // do something with `data`, e.g. print data.name
         });
