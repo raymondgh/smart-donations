@@ -92,6 +92,7 @@ function processPayment(simplifyToken) {
             console.log("processPayment success");
             alert("Thank you for your donation!");
             $('#paymentModal').modal('hide');
+            getHourRate();
         },
         error: function(error) {
             console.log("processPayment error");
