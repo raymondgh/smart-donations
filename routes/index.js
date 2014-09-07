@@ -28,7 +28,7 @@ fs.exists('../keys/keys.js', function(exists) {
 //});
 
 var azure = require('azure-storage');
-var tableSvc = azure.createTableService();
+//var tableSvc = azure.createTableService();
 
 
 /* GET home page. */
