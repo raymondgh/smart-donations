@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
     getHourRate();
     $("#simplify-payment-form").on("submit", function() {

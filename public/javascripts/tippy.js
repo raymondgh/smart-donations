@@ -32,7 +32,8 @@ function signIn() {
 
 function showCode(twitterId) {
 
-    var tippyNinJaDonateButton = '<script type="text/javascript" src="https://tippyninja.azurewebsites.net/tippy-ninja.js"></script>\
+    var tippyNinJaDonateButton = '<script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>\
+    <script type="text/javascript" src="https://tippyninja.azurewebsites.net/tippy-ninja.js"></script>\
     <button \
     id="tippyNinjaHourRate"\
     class="btn btn"> \
