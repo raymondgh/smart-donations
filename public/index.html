@@ -11,6 +11,9 @@
     <title>Tippy Ninja</title>
     <meta name="description" content="ShiftMates - Super simple employee scheduling page for everyone">
 
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
     <!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -21,7 +24,6 @@
 
     <!-- Template CSS -->
 
-    <link href="stylesheets/creditcard.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
 
 
@@ -38,21 +40,33 @@
 <header id="header">
     <div class="title">
         TIPPY NINJA
+        <img src="img/logo.png"/>
     </div>
+    <h3>The 10X Donation Button</h3>
     <span>
         A little transparency goes a long way. By telling your visitors and users how hard you worked and how much you've made so far, you empower donors to feel confident rewarding your efforts!
     </span>
-    <button
-            id="tippyNinjaHourRate"
-            class="btn btn">
-    </button>
-    <button
-            id="tippyNinjaDonate"
-            twitter-id="148966800"
-            class="btn btn-primary btn"
-            data-toggle="modal" data-target="#paymentModal">
-        DONATE
-    </button>
+    <div class="tippyNinjaButtonPanel">
+        <div class="btn-left col-md-7">
+            <button type="button"
+                    data-toggle="popover"
+                    id="tippyNinjaHourRate"
+                    class="btn donate-left"
+                    style="width: 100%;"
+                    data-content="Hours Worked">
+            </button>
+        </div>
+        <div class="btn-right col-md-5">
+            <button
+                    id="tippyNinjaDonate"
+                    class="btn donation-right"
+                    twitter-id="148966800"
+                    data-toggle="modal" data-target="#paymentModal">
+                DONATE
+            </button>
+        </div>
+    </div>
+
     <!-- Modal -->
     <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -143,19 +157,32 @@
 
     </div>
     <div id="container-right" class=" col-lg-6">
-        <div>
-            <img
-                    onclick="signIn()"
-                    class="signin"
-                    src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
-                    alt="Sign in with Twitter"
-                    title="Sign in with Twitter"/>
+        <div id="twitter-signin">
+            <div class="btn-left signin-left col-md-3">
+                <input type="number"
+                       id="hoursWorked"
+                       class=""
+                       placeholder="Hour">
+                </input>
+            </div>
+
+            <div class="btn-right signin-right col-md-5" id="tippySigninTwitter">
+                <img
+                        class="signin"
+                        src="img/twitter.png"
+                        alt="Log in and Get Code"
+                        title="Log in and Get Code"/> Log in and Get Code
+            </div>
+
         </div>
-        <div id="code">
+        <div id="code" style="display: none;">
         </div>
     </div>
 </div>	 <!-- END PAGE CONTENT WRAPPER	-->
 
+<div class="container">
+    <div></div>
+</div>
 
 <!-- EXTERNAL SCRIPTS
 ============================================= -->

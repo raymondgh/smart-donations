@@ -1,3 +1,10 @@
+
+$(document).ready(function() {
+    $("#tippySigninTwitter").click(function () {
+        signIn();
+    });
+});
+
 function signIn() {
     OAuth.initialize('SmThmY15olmUlwfrGWkbdZX7n-M');
     OAuth.popup('twitter').done(function(result) {
@@ -7,19 +14,22 @@ function signIn() {
             var twitterId = data["raw"]["id"];
             $("#tippyNinjaDonate").attr("twitter-id", twitterId);
             var url = '/updateHoursWorked';
-//            var hoursWorked = $("#hoursWorked").val();
+            var hoursWorked = $("#hoursWorked").val();
             var obj = {
                 twitterId: twitterId,
-                hoursWorked: 0
+                hoursWorked: hoursWorked
             };
+
             $.ajax({
                 type: "POST",
                 url: url,
                 data: obj,
                 success: function(data) {
                     console.log("updateHoursWorked success");
+                    $("#twitter-signin").hide();
+                    $("#code").show();
                     showCode(twitterId);
-//                    getHourRate();
+                    listDonation(data);
                 },
                 error: function(error) {
                     console.log("updateHoursWorked error");
@@ -28,6 +38,20 @@ function signIn() {
 
         });
     });
+}
+
+function listDonation(data) {
+    var totalHours = data.hoursWorked;
+    var totalCash = data.totalEarned;
+    var payments = data.payments;
+
+    var paymentsDiv = $("#payments");
+    paymentsDiv.empty();
+    for ( var i = 0; i < payments.length; i++ ) {
+        var payment = payments[i];
+        var time = payment.time;
+        var amount = payment.amount / 100;
+    }
 }
 
 function showCode(twitterId) {
