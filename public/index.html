@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
+
     <!-- Template CSS -->
     <link href="stylesheets/creditcard.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
@@ -25,6 +26,10 @@
 
     <!-- Responsive CSS -->
 
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
 
 </head>
 
@@ -50,13 +55,15 @@
                 title="Sign in with Twitter"/>
     </div>
 
-    <?prettify lang=html linenums=true?>
-    <pre class="prettyprint lang-html" >
-         <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
-             Donate
-         </button>
+    <pre><code class="html">
 
-    </pre>
+        <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+            Donate
+        </button>
+    </code></pre>
+
+
+
 
 
 
