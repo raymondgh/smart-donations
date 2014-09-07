@@ -2,13 +2,31 @@ var express = require('express');
 var router = express.Router();
 var Datastore = require('nedb')
     , db = new Datastore({ filename: 'database.json', autoload: true });
-var Keys = require('../keys/keys.js');
+var fs = require('fs');
 var Simplify = require('simplify-commerce');
-
-var SimplifyClient = Simplify.getClient({
-    publicKey: Keys.simplifyKeys.publicKey,
-    privateKey: Keys.simplifyKeys.privateKey
+var SimplifyClient;
+fs.exists('../keys/keys.js', function(exists) {
+    if (exists) {
+        var Keys = require('../keys/keys.js');
+        SimplifyClient = Simplify.getClient({
+            publicKey: Keys.simplifyKeys.publicKey,
+            privateKey: Keys.simplifyKeys.privateKey
+        });
+    } else {
+        SimplifyClient = Simplify.getClient({
+            publicKey: process.env.simplifyPublicKey,
+            privateKey: process.env.simplifyPrivateKey
+        });
+    }
 });
+
+
+//var Simplify = require('simplify-commerce');
+//
+//var SimplifyClient = Simplify.getClient({
+//    publicKey: Keys.simplifyKeys.publicKey,
+//    privateKey: Keys.simplifyKeys.privateKey
+//});
 
 
 /* GET home page. */
