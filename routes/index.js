@@ -20,13 +20,15 @@ fs.exists('../keys/keys.js', function(exists) {
     }
 });
 
-
 //var Simplify = require('simplify-commerce');
 //
 //var SimplifyClient = Simplify.getClient({
 //    publicKey: Keys.simplifyKeys.publicKey,
 //    privateKey: Keys.simplifyKeys.privateKey
 //});
+
+var azure = require('azure-storage');
+var tableSvc = azure.createTableService();
 
 
 /* GET home page. */
@@ -114,5 +116,7 @@ router.get('/testDb', function(req, res) {
         res.end(JSON.stringify(newDoc));
     });
 });
+
+
 
 module.exports = router;
