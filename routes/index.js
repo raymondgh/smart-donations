@@ -117,6 +117,37 @@ router.get('/testDb', function(req, res) {
     });
 });
 
+router.get('/processPayment', function(req, res) {
+    var token = req.body.simplifyToken;
+    var twitterId = req.body.twitterId;
+    var amount = req.body.amount;
 
+    SimplifyClient.payment.create({
+        amount : amount,
+        token : token,
+        description : "TippyNinja Donation",
+        currency : "USD"
+    }, function(errData, data){
+        if(errData){
+            res.end("Error Message: " + errData.data.error.message);
+            // handle the error
+            //return;
+        } else {
+            res.end("Payment Status: " + data.paymentStatus);
+        }
+    });
+
+//    var doc = {
+//        twitterId: 'ch4ch4',
+//        hoursWorked: '10',
+//        amountEarned: '10000' //in cents
+//    };
+//
+//    db.insert(doc, function (err, newDoc) {   // Callback is optional
+//        // newDoc is the newly inserted document, including its _id
+//        // newDoc has no key called notToBeSaved since its value was undefined
+//        res.end(JSON.stringify(newDoc));
+//    });
+});
 
 module.exports = router;
