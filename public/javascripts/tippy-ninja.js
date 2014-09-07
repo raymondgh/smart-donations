@@ -90,7 +90,7 @@ function processPayment(simplifyToken) {
         data: obj,
         success: function(data) {
             console.log("processPayment success");
-            alert("Process Payment");
+            alert("Thank you for your donation!");
             $('#paymentModal').modal('hide');
         },
         error: function(error) {
