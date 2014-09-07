@@ -29,11 +29,11 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
 
-    <script>hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>
 
 </head>
 
-<body style="display: block; opacity: 1;" onload="prettyPrint()">
+<body style="display: block; opacity: 1;" onload="hljs.initHighlightingOnLoad();">
 
 
 <header id="header">
@@ -55,12 +55,12 @@
                 title="Sign in with Twitter"/>
     </div>
 
-    <pre><code class="html">
+    <!--<pre><code class="html">-->
 
-        <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
-            Donate
-        </button>
-    </code></pre>
+        <!--<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">-->
+            <!--Donate-->
+        <!--</button>-->
+    <!--</code></pre>-->
 
 
 
@@ -79,6 +79,12 @@
                 </div>
                 <form id="simplify-payment-form" action="" method="POST">
                 <div class="modal-body">
+                        <div>
+                            <label>Donation Amount: </label>
+                            <input id="donationAmount" type="text"
+                                   value="" autofocus />
+                        </div>
+
                         <div>
                             <label>Credit Card Number: </label>
                             <input id="cc-number" type="text"
@@ -117,7 +123,7 @@
                                 <option value="22">2022</option>
                             </select>
                         </div>
-                        <button id="process-payment-btn" type="submit">Process Payment</button>
+                        <!--<button id="process-payment-btn" type="submit">Process Payment</button>-->
 
                 </div>
                 <div class="modal-footer">
