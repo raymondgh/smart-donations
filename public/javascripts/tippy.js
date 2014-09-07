@@ -72,16 +72,26 @@ function showCode(twitterId) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>\
     <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>\
     <script type="text/javascript" src="https://tippyninja.azurewebsites.net/javascripts/tippy-ninja.js"></script>\
-    <button \
-    id="tippyNinjaHourRate"\
-    class="btn btn"> \
-    </button> \
-    <button\
+    <div class="tippyNinjaButtonPanel">\
+        <div class="btn-left col-md-7">\
+        <button type="button"\
+        data-toggle="popover"\
+        id="tippyNinjaHourRate"\
+        class="btn donate-left"\
+        style="width: 100%;"\
+        data-content="Hours Worked">\
+        </button>\
+        </div>\
+    <div class="btn-right col-md-5">\
+        <button\
         id="tippyNinjaDonate"\
-        twitter-id="' + twitterId + '" ' +
-        'class="btn btn-primary btn"\
-        data-toggle="modal" data-target="#paymentModal">DONATE\
-    </button>\
+        class="btn donation-right"\
+        twitter-id="148966800"\
+        data-toggle="modal" data-target="#paymentModal">\
+        DONATE\
+        </button>\
+    </div>\
+    </div>\
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
     <div class="modal-dialog">\
         <div class="modal-content">\
