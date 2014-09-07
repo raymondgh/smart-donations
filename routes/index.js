@@ -138,10 +138,40 @@ router.get('/testDb', function(req, res) {
 //        }
 //    });
 
-    azureTableSvc.insertEntity('users',row, function (error, result, response) {
+//    azureTableSvc.insertEntity('users',row, function (error, result, response) {
+//        if(!error){
+//            // Entity inserted
+//            res.end(JSON.stringify(result));
+//        } else {
+//            res.end(JSON.stringify(error));
+//        }
+//    });
+
+//    azureTableSvc.retrieveEntity('users', 'users', '1', function(error, result, response){
+//        if(!error){
+//            // result contains the entity
+//            res.end(JSON.stringify(result));
+//        } else {
+//            res.end(JSON.stringify(error));
+//        }
+//    });
+
+    var userData = {
+        PartitionKey: entGen.String('users'),
+        RowKey: entGen.String('3'),
+        data: entGen.String(JSON.stringify({twitterId:10,totalEarned:10000,hoursWorked:100}))
+    };
+    azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
         if(!error){
             // Entity inserted
-            res.end(JSON.stringify(result));
+            azureTableSvc.retrieveEntity('users', 'users', '3', function(error, result, response){
+                if(!error){
+                    // result contains the entity
+                    res.end(JSON.stringify(result));
+                } else {
+                    res.end(JSON.stringify(error));
+                }
+            });
         } else {
             res.end(JSON.stringify(error));
         }
@@ -149,7 +179,7 @@ router.get('/testDb', function(req, res) {
 
 });
 
-router.get('/processPayment', function(req, res) {
+router.post('/processPayment', function(req, res) {
     var token = req.body.simplifyToken;
     var twitterId = req.body.twitterId;
     var amount = req.body.amount;
@@ -165,7 +195,63 @@ router.get('/processPayment', function(req, res) {
             // handle the error
             //return;
         } else {
-            res.end("Payment Status: " + data.paymentStatus);
+//            res.end("Payment Status: " + data.paymentStatus);
+            azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+                if(!error){
+                    // result contains the entity
+//                    res.end(result.data._);
+                    var userData = result;
+                    var userDataObject = JSON.parse(result.data._);
+                    console.log(JSON.stringify(userDataObject));
+//                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
+                    userDataObject.totalEarned = userDataObject.totalEarned + parseFloat(amount);
+                    console.log(JSON.stringify(userDataObject));
+                    userData.data._ = JSON.stringify(userDataObject);
+
+                    azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
+                        if(!error){
+                            // Entity inserted
+                            azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+                                if(!error){
+                                    // result contains the entity
+//                                    res.end(JSON.stringify(result));
+                                    res.end(result.data._);
+                                } else {
+                                    res.end(500,JSON.stringify(error));
+                                }
+                            });
+                        } else {
+                            res.end(500,JSON.stringify(error));
+                        }
+                    });
+
+                } else {
+                    //entity not found... new user?
+                    var entGen = azure.TableUtilities.entityGenerator;
+                    var userData = {
+                        PartitionKey: entGen.String('users'),
+                        RowKey: entGen.String(twitterId.toString()),
+                        data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:parseFloat(amount),hoursWorked:0}))
+                    };
+                    azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
+                        if(!error){
+                            // Entity inserted
+                            azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+                                if(!error){
+                                    // result contains the entity
+//                                    res.end(JSON.stringify(result));
+                                    res.end(result.data._);
+                                } else {
+                                    res.end(500,JSON.stringify(error));
+                                }
+                            });
+                        } else {
+                            res.end(500,JSON.stringify(error));
+                        }
+                    });
+
+                }
+            });
         }
     });
 
@@ -180,6 +266,84 @@ router.get('/processPayment', function(req, res) {
 //        // newDoc has no key called notToBeSaved since its value was undefined
 //        res.end(JSON.stringify(newDoc));
 //    });
+});
+
+router.get('/getUserInfo/:twitterId', function(req, res) {
+    var twitterId = req.params.twitterId;
+
+    azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+        if(!error){
+            // result contains the entity
+            res.end(result.data._);
+        } else {
+            res.end(500,JSON.stringify(error));
+        }
+    });
+
+//    res.end({totalEarned:1000,hoursWorked:10});
+});
+
+
+router.post('/updateHoursWorked', function(req, res) {
+    var twitterId = req.body.twitterId;
+    var hoursWorked = req.body.hoursWorked;
+
+    azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+        if(!error){
+            // result contains the entity
+//                    res.end(result.data._);
+            var userData = result;
+            var userDataObject = JSON.parse(result.data._);
+            console.log(JSON.stringify(userDataObject));
+//                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
+            userDataObject.hoursWorked = userDataObject.hoursWorked + parseFloat(hoursWorked);
+            console.log(JSON.stringify(userDataObject));
+            userData.data._ = JSON.stringify(userDataObject);
+
+            azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
+                if(!error){
+                    // Entity inserted
+                    azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+                        if(!error){
+                            // result contains the entity
+//                                    res.end(JSON.stringify(result));
+                            res.end(result.data._);
+                        } else {
+                            res.end(500,JSON.stringify(error));
+                        }
+                    });
+                } else {
+                    res.end(500,JSON.stringify(error));
+                }
+            });
+
+        } else {
+            //entity not found... new user?
+            var entGen = azure.TableUtilities.entityGenerator;
+            var userData = {
+                PartitionKey: entGen.String('users'),
+                RowKey: entGen.String(twitterId.toString()),
+                data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:0,hoursWorked:hoursWorked}))
+            };
+            azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
+                if(!error){
+                    // Entity inserted
+                    azureTableSvc.retrieveEntity('users', 'users', twitterId, function(error, result, response){
+                        if(!error){
+                            // result contains the entity
+//                                    res.end(JSON.stringify(result));
+                            res.end(result.data._);
+                        } else {
+                            res.end(500,JSON.stringify(error));
+                        }
+                    });
+                } else {
+                    res.end(500,JSON.stringify(error));
+                }
+            });
+
+        }
+    });
 });
 
 module.exports = router;
