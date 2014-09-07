@@ -17,9 +17,10 @@
     <!-- Libs CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Bangers'  type='text/css'>
 
     <!-- Template CSS -->
+
     <link href="stylesheets/creditcard.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
 
@@ -37,6 +38,22 @@
 
 
 <header id="header">
+    <div class="title">
+        TIPPY NINJA
+    </div>
+    <span>
+        A little transparency goes a long way. By telling your visitors and users how hard you worked and how much you've made so far, you empower donors to feel confident rewarding your efforts!
+    </span>
+    <button
+            id="tippyNinjaHourRate"
+            class="btn btn">
+    </button>
+    <button
+            id="tippyNinjaDonate"
+            class="btn btn-primary btn"
+            data-toggle="modal" data-target="#myModal">
+        DONATE
+    </button>
 </header>
 
 
@@ -44,59 +61,68 @@
 
 <!-- PAGE CONTENT WRAPPER
 ============================================= -->
-<div id="content-wrapper">
+<div id="content-wrapper" class="container">
+    <div id="container-left" class=" col-lg-6">
+        <div class="instruction">
+            1. Count your project's work-hours<br/>
+            2. Authenticate with Twitter<br/>
+            3. Paste the code snippet in your site<br/>
+        </div>
 
-    <div>
-        <img
-                onclick="signIn()"
-                class="signin"
-                src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
-                alt="Sign in with Twitter"
-                title="Sign in with Twitter"/>
+    </div>
+    <div id="container-right" class=" col-lg-6">
+        <div>
+            <img
+                    onclick="signIn()"
+                    class="signin"
+                    src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
+                    alt="Sign in with Twitter"
+                    title="Sign in with Twitter"/>
+        </div>
+        <div class="code">
+
+        </div>
     </div>
 
-    <!--<pre><code class="html">-->
 
-        <!--<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">-->
-            <!--Donate-->
-        <!--</button>-->
-    <!--</code></pre>-->
 
 
 
     <!-- Button trigger modal -->
-    <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
-        Donate
-    </button>
+
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title" id="myModalLabel">Make donation</h4>
                 </div>
-                <form id="simplify-payment-form" action="" method="POST">
+                <form id="simplify-payment-form" action="/processPayment" method="POST">
                 <div class="modal-body">
-                        <div>
+                        <div class="form-group">
                             <label>Donation Amount: </label>
                             <input id="donationAmount" type="text"
+                                   class="form-control"
                                    value="" autofocus />
                         </div>
 
-                        <div>
+                        <div class="form-group">
                             <label>Credit Card Number: </label>
                             <input id="cc-number" type="text"
+                                   class="form-control"
                                    maxlength="20" autocomplete="off" value="" autofocus />
                         </div>
-                        <div>
+                        <div class="form-group">
                             <label>CVC: </label>
-                            <input id="cc-cvc" type="text" maxlength="4" autocomplete="off" value=""/>
+                            <input id="cc-cvc" type="text"
+                                   class="form-control"
+                                   maxlength="4" autocomplete="off" value=""/>
                         </div>
-                        <div>
+                        <div class="form-group ">
                             <label>Expiry Date: </label>
-                            <select id="cc-exp-month">
+                            <select id="cc-exp-month" class="form-control">
                                 <option value="01">Jan</option>
                                 <option value="02">Feb</option>
                                 <option value="03">Mar</option>
@@ -110,7 +136,7 @@
                                 <option value="11">Nov</option>
                                 <option value="12">Dec</option>
                             </select>
-                            <select id="cc-exp-year">
+                            <select id="cc-exp-year" class="form-control">
                                 <option value="13">2013</option>
                                 <option value="14">2014</option>
                                 <option value="15">2015</option>
@@ -123,8 +149,6 @@
                                 <option value="22">2022</option>
                             </select>
                         </div>
-                        <!--<button id="process-payment-btn" type="submit">Process Payment</button>-->
-
                 </div>
                 <div class="modal-footer">
                     <button
