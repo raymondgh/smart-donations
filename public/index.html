@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html class=" js no-touch" lang="en"><!--<![endif]--><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <title>Tippy Ninja</title>
+    <meta name="description" content="ShiftMates - Super simple employee scheduling page for everyone">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Libs CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <!-- Template CSS -->
+    <link href="stylesheets/creditcard.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+
+    <!-- Responsive CSS -->
+
+
+</head>
+
+<body style="display: block; opacity: 1;" onload="prettyPrint()">
+
+
+<header id="header">
+</header>
+
+
+
+
+<!-- PAGE CONTENT WRAPPER
+============================================= -->
+<div id="content-wrapper">
+
+    <div>
+        <img
+                onclick="signIn()"
+                class="signin"
+                src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png"
+                alt="Sign in with Twitter"
+                title="Sign in with Twitter"/>
+    </div>
+
+    <?prettify lang=html linenums=true?>
+    <pre class="prettyprint lang-html" >
+         <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+             Donate
+         </button>
+
+    </pre>
+
+
+
+
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
+        Donate
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Make donation</h4>
+                </div>
+                <form id="simplify-payment-form" action="" method="POST">
+                <div class="modal-body">
+                        <div>
+                            <label>Credit Card Number: </label>
+                            <input id="cc-number" type="text"
+                                   maxlength="20" autocomplete="off" value="" autofocus />
+                        </div>
+                        <div>
+                            <label>CVC: </label>
+                            <input id="cc-cvc" type="text" maxlength="4" autocomplete="off" value=""/>
+                        </div>
+                        <div>
+                            <label>Expiry Date: </label>
+                            <select id="cc-exp-month">
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select id="cc-exp-year">
+                                <option value="13">2013</option>
+                                <option value="14">2014</option>
+                                <option value="15">2015</option>
+                                <option value="16">2016</option>
+                                <option value="17">2017</option>
+                                <option value="18">2018</option>
+                                <option value="19">2019</option>
+                                <option value="20">2020</option>
+                                <option value="21">2021</option>
+                                <option value="22">2022</option>
+                            </select>
+                        </div>
+                        <button id="process-payment-btn" type="submit">Process Payment</button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Donate</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>	 <!-- END PAGE CONTENT WRAPPER	-->
+
+
+<!-- EXTERNAL SCRIPTS
+============================================= -->
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
+<script type="text/javascript" src="javascripts/google-code-prettify/prettify.js"></script>
+<script src="javascripts/tippy.js"></script>
+<script src="javascripts/oauth.min.js"></script>
+</body></html>
