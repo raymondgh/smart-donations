@@ -7,10 +7,10 @@ function signIn() {
             var twitterId = data["raw"]["id"];
             $("#tippyNinjaDonate").attr("twitter-id", twitterId);
             var url = '/updateHoursWorked';
-            var hoursWorked = $("#hoursWorked").val();
+//            var hoursWorked = $("#hoursWorked").val();
             var obj = {
                 twitterId: twitterId,
-                hoursWorked: hoursWorked
+                hoursWorked: 0
             };
             $.ajax({
                 type: "POST",
@@ -32,8 +32,13 @@ function signIn() {
 
 function showCode(twitterId) {
 
-    var tippyNinJaDonateButton = '<script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>\
-    <script type="text/javascript" src="https://tippyninja.azurewebsites.net/tippy-ninja.js"></script>\
+    var tippyNinJaDonateButton = '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">\
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">\
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>\
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>\
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>\
+    <script type="text/javascript" src="https://www.simplify.com/commerce/v1/simplify.js"></script>\
+    <script type="text/javascript" src="https://tippyninja.azurewebsites.net/javascripts/tippy-ninja.js"></script>\
     <button \
     id="tippyNinjaHourRate"\
     class="btn btn"> \
@@ -42,7 +47,7 @@ function showCode(twitterId) {
         id="tippyNinjaDonate"\
         twitter-id="' + twitterId + '" ' +
         'class="btn btn-primary btn"\
-        data-toggle="modal" data-target="#myModal">DONATE\
+        data-toggle="modal" data-target="#paymentModal">DONATE\
     </button>\
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">\
     <div class="modal-dialog">\

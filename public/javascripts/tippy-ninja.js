@@ -65,6 +65,7 @@ function simplifyResponseHandler(data) {
     } else {
         // The token contains id, last4, and card type
         var token = data["id"];
+        processPayment(token);
     }
 }
 
