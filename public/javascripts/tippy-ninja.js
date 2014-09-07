@@ -25,12 +25,15 @@ function getHourRate() {
         type: "GET",
         url: url,
         success: function(data) {
+            data = jQuery.parseJSON(data);
             console.log("getUserInfo success: " + JSON.stringify(data));
             var totalHours = data.hoursWorked;
             var totalCash = data.totalEarned;
+            console.log("totalHours " + totalHours);
+            console.log("totalCash " + totalCash);
             var rate = 0;
             if ( totalCash > 0 ) {
-                rate = (totalCash*100)/totalHours.toFixed(2);
+                rate = ((totalCash*100)/totalHours).toFixed(2);
             }
             $('#tippyNinjaHourRate').text("$" + rate + " / Hour");
             $('#tippyNinjaHourRate').attr("data-content", totalHours  + "Hours Worked");

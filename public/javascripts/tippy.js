@@ -28,6 +28,7 @@ function signIn() {
                     console.log("updateHoursWorked success");
                     $("#twitter-signin").hide();
                     $("#code").show();
+                    $(".payment-container").show();
                     showCode(twitterId);
                     listDonation(data);
                 },
@@ -41,9 +42,17 @@ function signIn() {
 }
 
 function listDonation(data) {
+    data = jQuery.parseJSON(data);
     var totalHours = data.hoursWorked;
-    var totalCash = data.totalEarned;
+    var totalCash = (data.totalEarned*100);
     var payments = data.payments;
+    var rate = 0;
+    if ( totalCash > 0 ) {
+        rate = ((totalCash*100)/totalHours).toFixed(2);
+    }
+
+    $("#payment-summary").text("Hours: " + totalHours + " Donations: $" + totalCash + " Wage: $" + rate);
+    $("#cashout-button").text("Cash out $" + totalCash);
 
     var paymentsDiv = $("#payments");
     paymentsDiv.empty();
