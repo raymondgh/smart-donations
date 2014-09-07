@@ -206,6 +206,8 @@ router.post('/processPayment', function(req, res) {
                     console.log(JSON.stringify(userDataObject));
 //                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
                     userDataObject.totalEarned = userDataObject.totalEarned + parseFloat(amount);
+                    if(userDataObject.payments == null) userDataObject.payments = [];
+                    userDataObject.payments.push({time:new Date(),amount:parseFloat(amount)})
                     console.log(JSON.stringify(userDataObject));
                     userData.data._ = JSON.stringify(userDataObject);
 
@@ -232,7 +234,7 @@ router.post('/processPayment', function(req, res) {
                     var userData = {
                         PartitionKey: entGen.String('users'),
                         RowKey: entGen.String(twitterId.toString()),
-                        data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:parseFloat(amount),hoursWorked:0}))
+                        data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:parseFloat(amount),hoursWorked:0,payments:[]}))
                     };
                     azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
                         if(!error){
@@ -324,7 +326,7 @@ router.post('/updateHoursWorked', function(req, res) {
             var userData = {
                 PartitionKey: entGen.String('users'),
                 RowKey: entGen.String(twitterId.toString()),
-                data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:0,hoursWorked:hoursWorked}))
+                data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:0,hoursWorked:hoursWorked,payments:[]}))
             };
             azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
                 if(!error){
