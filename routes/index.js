@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var Datastore = require('nedb')
+    , db = new Datastore({ filename: 'database.json', autoload: true });
 var Keys = require('../keys/keys.js');
 var Simplify = require('simplify-commerce');
 
@@ -52,6 +54,46 @@ router.get('/testCharge/:token', function(req, res) {
         } else {
             res.end("Payment Status: " + data.paymentStatus);
         }
+    });
+});
+
+router.get('/getChargeToken', function(req, res) {
+    SimplifyClient.cardtoken.create({
+        card : {
+            addressState : "MO",
+            expMonth : "11",
+            expYear : "19",
+            addressCity : "OFallon",
+            cvc : "123",
+            number : "5105105105105100"
+        }
+    }, function(errData, data){
+
+        if(errData){
+            res.end("Error Message: " + errData.data.error.message);
+            // handle the error
+            //return;
+        } else {
+            res.end("Success Response: " + JSON.stringify(data));
+        }
+    });
+});
+
+router.get('/testDb', function(req, res) {
+//    var doc = { hello: 'world', n: 5, today: new Date(), nedbIsAwesome: true, notthere: null, notToBeSaved: undefined  // Will not be saved
+//        , fruits: [ 'apple', 'orange', 'pear' ], infos: { name: 'nedb' }
+//    };
+
+    var doc = {
+        twitterId: 'ch4ch4',
+        hoursWorked: '10',
+        amountEarned: '10000' //in cents
+    };
+
+    db.insert(doc, function (err, newDoc) {   // Callback is optional
+        // newDoc is the newly inserted document, including its _id
+        // newDoc has no key called notToBeSaved since its value was undefined
+        res.end(JSON.stringify(newDoc));
     });
 });
 
