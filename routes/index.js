@@ -120,7 +120,33 @@ router.get('/testDb', function(req, res) {
 //        // newDoc has no key called notToBeSaved since its value was undefined
 //        res.end(JSON.stringify(newDoc));
 //    });
-    
+
+
+    var entGen = azure.TableUtilities.entityGenerator;
+    var row = {
+        PartitionKey: entGen.String('users'),
+        RowKey: entGen.String('2'),
+        twitterId: entGen.String('12345'),
+        hoursWorked: entGen.Double(10),
+        amountEarned: entGen.Double(10000)
+//        updatedAt: entGen.DateTime(new Date(Date.UTC(2015, 6, 20)))
+    };
+
+//    azureTableSvc.createTableIfNotExists('users', function(error, result, response){
+//        if(!error){
+//            // Table exists or created
+//        }
+//    });
+
+    azureTableSvc.insertEntity('users',row, function (error, result, response) {
+        if(!error){
+            // Entity inserted
+            res.end(JSON.stringify(result));
+        } else {
+            res.end(JSON.stringify(error));
+        }
+    });
+
 });
 
 router.get('/processPayment', function(req, res) {
