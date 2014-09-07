@@ -203,12 +203,12 @@ router.post('/processPayment', function(req, res) {
 //                    res.end(result.data._);
                     var userData = result;
                     var userDataObject = JSON.parse(result.data._);
-                    console.log(JSON.stringify(userDataObject));
+                    //console.log(JSON.stringify(userDataObject));
 //                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
                     userDataObject.totalEarned = userDataObject.totalEarned + parseFloat(amount);
                     if(userDataObject.payments == null) userDataObject.payments = [];
                     userDataObject.payments.push({time:new Date(),amount:parseFloat(amount)})
-                    console.log(JSON.stringify(userDataObject));
+                    //console.log(JSON.stringify(userDataObject));
                     userData.data._ = JSON.stringify(userDataObject);
 
                     azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
@@ -297,10 +297,10 @@ router.post('/updateHoursWorked', function(req, res) {
 //                    res.end(result.data._);
             var userData = result;
             var userDataObject = JSON.parse(result.data._);
-            console.log(JSON.stringify(userDataObject));
+            //console.log(JSON.stringify(userDataObject));
 //                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
-            userDataObject.hoursWorked = userDataObject.hoursWorked + parseFloat(hoursWorked);
-            console.log(JSON.stringify(userDataObject));
+            userDataObject.hoursWorked = parseFloat(hoursWorked);
+            //console.log(JSON.stringify(userDataObject));
             userData.data._ = JSON.stringify(userDataObject);
 
             azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
