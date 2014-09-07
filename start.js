@@ -1,5 +1,5 @@
 var debug = require('debug')('smart-donations');
-var app = require('../app');
+var app = require('./app');
 
 app.set('port', process.env.PORT || 3000);
 
