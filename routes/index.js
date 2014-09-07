@@ -8,6 +8,7 @@ var azure = require('azure-storage');
 
 var SimplifyClient;
 var azureTableSvc;
+
 fs.exists('keys/keys.js', function(exists) {
     if (exists) {
         var Keys = require('../keys/keys.js');
@@ -37,50 +38,50 @@ fs.exists('keys/keys.js', function(exists) {
 
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
-});
+//router.get('/', function(req, res) {
+//  res.render('index', { title: 'Express' });
+//});
 
-router.get('/authorize', function(req, res) {
-    res.end(req.params);
-    //res.render('index', { title: 'Express' });
-});
+//router.get('/authorize', function(req, res) {
+//    res.end(req.params);
+//    //res.render('index', { title: 'Express' });
+//});
 
-router.get('/testCharge', function(req, res) {
-    SimplifyClient.payment.create({
-        amount : "1000",
-        token : "f21da65e-f0ab-45cb-b8e6-40b493c3671f",
-        description : "payment description",
-        currency : "USD"
-    }, function(errData, data){
-        if(errData){
-            res.end("Error Message: " + errData.data.error.message);
-            // handle the error
-            //return;
-        } else {
-            res.end("Payment Status: " + data.paymentStatus);
-        }
-    });
-});
-
-router.get('/testCharge/:token', function(req, res) {
-    var token = req.params.token;
-
-    SimplifyClient.payment.create({
-        amount : "1000",
-        token : token,
-        description : "payment description",
-        currency : "USD"
-    }, function(errData, data){
-        if(errData){
-            res.end("Error Message: " + errData.data.error.message);
-            // handle the error
-            //return;
-        } else {
-            res.end("Payment Status: " + data.paymentStatus);
-        }
-    });
-});
+//router.get('/testCharge', function(req, res) {
+//    SimplifyClient.payment.create({
+//        amount : "1000",
+//        token : "f21da65e-f0ab-45cb-b8e6-40b493c3671f",
+//        description : "payment description",
+//        currency : "USD"
+//    }, function(errData, data){
+//        if(errData){
+//            res.end("Error Message: " + errData.data.error.message);
+//            // handle the error
+//            //return;
+//        } else {
+//            res.end("Payment Status: " + data.paymentStatus);
+//        }
+//    });
+//});
+//
+//router.get('/testCharge/:token', function(req, res) {
+//    var token = req.params.token;
+//
+//    SimplifyClient.payment.create({
+//        amount : "1000",
+//        token : token,
+//        description : "payment description",
+//        currency : "USD"
+//    }, function(errData, data){
+//        if(errData){
+//            res.end("Error Message: " + errData.data.error.message);
+//            // handle the error
+//            //return;
+//        } else {
+//            res.end("Payment Status: " + data.paymentStatus);
+//        }
+//    });
+//});
 
 router.get('/getChargeToken', function(req, res) {
     SimplifyClient.cardtoken.create({
@@ -104,80 +105,80 @@ router.get('/getChargeToken', function(req, res) {
     });
 });
 
-router.get('/testDb', function(req, res) {
-//    var doc = { hello: 'world', n: 5, today: new Date(), nedbIsAwesome: true, notthere: null, notToBeSaved: undefined  // Will not be saved
-//        , fruits: [ 'apple', 'orange', 'pear' ], infos: { name: 'nedb' }
+//router.get('/testDb', function(req, res) {
+////    var doc = { hello: 'world', n: 5, today: new Date(), nedbIsAwesome: true, notthere: null, notToBeSaved: undefined  // Will not be saved
+////        , fruits: [ 'apple', 'orange', 'pear' ], infos: { name: 'nedb' }
+////    };
+//
+//    var doc = {
+//        twitterId: 'ch4ch4',
+//        hoursWorked: '10',
+//        amountEarned: '10000' //in cents
 //    };
-
-    var doc = {
-        twitterId: 'ch4ch4',
-        hoursWorked: '10',
-        amountEarned: '10000' //in cents
-    };
-
-//    db.insert(doc, function (err, newDoc) {   // Callback is optional
-//        // newDoc is the newly inserted document, including its _id
-//        // newDoc has no key called notToBeSaved since its value was undefined
-//        res.end(JSON.stringify(newDoc));
-//    });
-
-
-    var entGen = azure.TableUtilities.entityGenerator;
-    var row = {
-        PartitionKey: entGen.String('users'),
-        RowKey: entGen.String('2'),
-        twitterId: entGen.String('12345'),
-        hoursWorked: entGen.Double(10),
-        amountEarned: entGen.Double(10000)
-//        updatedAt: entGen.DateTime(new Date(Date.UTC(2015, 6, 20)))
-    };
-
-//    azureTableSvc.createTableIfNotExists('users', function(error, result, response){
-//        if(!error){
-//            // Table exists or created
-//        }
-//    });
-
-//    azureTableSvc.insertEntity('users',row, function (error, result, response) {
+//
+////    db.insert(doc, function (err, newDoc) {   // Callback is optional
+////        // newDoc is the newly inserted document, including its _id
+////        // newDoc has no key called notToBeSaved since its value was undefined
+////        res.end(JSON.stringify(newDoc));
+////    });
+//
+//
+//    var entGen = azure.TableUtilities.entityGenerator;
+//    var row = {
+//        PartitionKey: entGen.String('users'),
+//        RowKey: entGen.String('2'),
+//        twitterId: entGen.String('12345'),
+//        hoursWorked: entGen.Double(10),
+//        amountEarned: entGen.Double(10000)
+////        updatedAt: entGen.DateTime(new Date(Date.UTC(2015, 6, 20)))
+//    };
+//
+////    azureTableSvc.createTableIfNotExists('users', function(error, result, response){
+////        if(!error){
+////            // Table exists or created
+////        }
+////    });
+//
+////    azureTableSvc.insertEntity('users',row, function (error, result, response) {
+////        if(!error){
+////            // Entity inserted
+////            res.end(JSON.stringify(result));
+////        } else {
+////            res.end(JSON.stringify(error));
+////        }
+////    });
+//
+////    azureTableSvc.retrieveEntity('users', 'users', '1', function(error, result, response){
+////        if(!error){
+////            // result contains the entity
+////            res.end(JSON.stringify(result));
+////        } else {
+////            res.end(JSON.stringify(error));
+////        }
+////    });
+//
+//    var userData = {
+//        PartitionKey: entGen.String('users'),
+//        RowKey: entGen.String('3'),
+//        data: entGen.String(JSON.stringify({twitterId:10,totalEarned:10000,hoursWorked:100}))
+//    };
+//    azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
 //        if(!error){
 //            // Entity inserted
-//            res.end(JSON.stringify(result));
+//            azureTableSvc.retrieveEntity('users', 'users', '3', function(error, result, response){
+//                if(!error){
+//                    // result contains the entity
+//                    res.end(JSON.stringify(result));
+//                } else {
+//                    res.end(JSON.stringify(error));
+//                }
+//            });
 //        } else {
 //            res.end(JSON.stringify(error));
 //        }
 //    });
-
-//    azureTableSvc.retrieveEntity('users', 'users', '1', function(error, result, response){
-//        if(!error){
-//            // result contains the entity
-//            res.end(JSON.stringify(result));
-//        } else {
-//            res.end(JSON.stringify(error));
-//        }
-//    });
-
-    var userData = {
-        PartitionKey: entGen.String('users'),
-        RowKey: entGen.String('3'),
-        data: entGen.String(JSON.stringify({twitterId:10,totalEarned:10000,hoursWorked:100}))
-    };
-    azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
-        if(!error){
-            // Entity inserted
-            azureTableSvc.retrieveEntity('users', 'users', '3', function(error, result, response){
-                if(!error){
-                    // result contains the entity
-                    res.end(JSON.stringify(result));
-                } else {
-                    res.end(JSON.stringify(error));
-                }
-            });
-        } else {
-            res.end(JSON.stringify(error));
-        }
-    });
-
-});
+//
+//});
 
 router.post('/processPayment', function(req, res) {
     var token = req.body.simplifyToken;
@@ -205,6 +206,8 @@ router.post('/processPayment', function(req, res) {
                     console.log(JSON.stringify(userDataObject));
 //                    userDataObject.totalEarned = parseFloat(userDataObject.totalEarned) + amount;
                     userDataObject.totalEarned = userDataObject.totalEarned + parseFloat(amount);
+                    if(userDataObject.payments == null) userDataObject.payments = [];
+                    userDataObject.payments.push({time:new Date(),amount:parseFloat(amount)})
                     console.log(JSON.stringify(userDataObject));
                     userData.data._ = JSON.stringify(userDataObject);
 
@@ -231,7 +234,7 @@ router.post('/processPayment', function(req, res) {
                     var userData = {
                         PartitionKey: entGen.String('users'),
                         RowKey: entGen.String(twitterId.toString()),
-                        data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:parseFloat(amount),hoursWorked:0}))
+                        data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:parseFloat(amount),hoursWorked:0,payments:[]}))
                     };
                     azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
                         if(!error){
@@ -323,7 +326,7 @@ router.post('/updateHoursWorked', function(req, res) {
             var userData = {
                 PartitionKey: entGen.String('users'),
                 RowKey: entGen.String(twitterId.toString()),
-                data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:0,hoursWorked:hoursWorked}))
+                data: entGen.String(JSON.stringify({twitterId:twitterId,totalEarned:0,hoursWorked:hoursWorked,payments:[]}))
             };
             azureTableSvc.insertOrReplaceEntity('users',userData, function (error, result, response) {
                 if(!error){
